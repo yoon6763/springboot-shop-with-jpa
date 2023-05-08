@@ -3,6 +3,7 @@ package com.shop.spring.shop.repository;
 import com.shop.spring.shop.constant.ItemSellStatus;
 import com.shop.spring.shop.entity.Item;
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,11 @@ import static org.assertj.core.api.Assertions.assertThat;
 class ItemRepositoryTest {
     @Autowired
     ItemRepository itemRepository;
+
+    @AfterEach
+    public void afterEach() {
+        itemRepository.deleteAll();
+    }
 
     @Test
     @DisplayName("상품 저장 테스트")
@@ -63,4 +69,13 @@ class ItemRepositoryTest {
     }
 
 
+    @Test
+    @DisplayName("@Query를 이용한 상품 조회 테스트")
+    public void findByItemDetailTest() {
+        this.createItemList();
+        List<Item> itemList = itemRepository.findByItemDetail("테스트 상품 상세 설명");
+        itemList.forEach(item -> {
+            System.out.println(item.toString());
+        });
+    }
 }
