@@ -2,10 +2,7 @@ package com.shop.spring.shop.entity;
 
 import com.shop.spring.shop.constant.Role;
 import com.shop.spring.shop.dto.MemberFormDto;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.persistence.*;
@@ -15,6 +12,7 @@ import javax.persistence.*;
 @Getter
 @Setter
 @ToString
+@NoArgsConstructor
 public class Member {
     @Id
     @Column(name = "member_id")

@@ -1,6 +1,8 @@
 package com.shop.spring.shop.entity;
 
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import javax.persistence.*;
@@ -9,6 +11,7 @@ import javax.persistence.*;
 @Getter
 @ToString
 @Entity
+@NoArgsConstructor
 public class Cart {
 
     @Id
@@ -20,5 +23,8 @@ public class Cart {
     @JoinColumn(name = "member_id")
     private Member member;
 
-
+    @Builder
+    public Cart(Member member) {
+        this.member = member;
+    }
 }
