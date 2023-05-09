@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      lang="ko">
-
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -20,10 +18,10 @@
     <th:block layout:fragment="css"></th:block>
 
 </head>
-
 <body>
 
 <div th:replace="fragments/header::header"></div>
+
 <div layout:fragment="content" class="content">
 
 </div>
