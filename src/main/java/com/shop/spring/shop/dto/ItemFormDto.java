@@ -2,7 +2,9 @@ package com.shop.spring.shop.dto;
 
 import com.shop.spring.shop.constant.ItemSellStatus;
 import com.shop.spring.shop.entity.Item;
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.modelmapper.ModelMapper;
 
@@ -11,6 +13,7 @@ import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
+@NoArgsConstructor
 @Getter
 @Setter
 public class ItemFormDto {
@@ -20,13 +23,13 @@ public class ItemFormDto {
     private String itemNm;
 
     @NotNull(message = "가격은 필수 입력 값입니다.")
-    private String price;
+    private int price;
 
     @NotBlank(message = "이름은 필수 입력 값입니다.")
     private String itemDetail;
 
     @NotNull(message = "재고는 필수 입력 값입니다.")
-    private String stockNumber;
+    private int stockNumber;
 
     private ItemSellStatus itemSellStatus;
 
@@ -42,5 +45,16 @@ public class ItemFormDto {
 
     public static ItemFormDto of(Item item) {
         return modelMapper.map(item, ItemFormDto.class);
+    }
+
+    @Builder
+    public ItemFormDto(String itemNm, int price, String itemDetail, int stockNumber, ItemSellStatus itemSellStatus, List<ItemImgDto> itemImgDtoList, List<Long> itemImgIds) {
+        this.itemNm = itemNm;
+        this.price = price;
+        this.itemDetail = itemDetail;
+        this.stockNumber = stockNumber;
+        this.itemSellStatus = itemSellStatus;
+        this.itemImgDtoList = itemImgDtoList;
+        this.itemImgIds = itemImgIds;
     }
 }
