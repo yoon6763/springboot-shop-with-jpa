@@ -1,6 +1,7 @@
 package com.shop.spring.shop.entity;
 
 import com.shop.spring.shop.constant.ItemSellStatus;
+import com.shop.spring.shop.dto.ItemFormDto;
 import lombok.*;
 
 import javax.persistence.*;
@@ -48,5 +49,13 @@ public class Item {
         this.itemSellStatus = itemSellStatus;
         this.regTime = regTime;
         this.updateTime = updateTime;
+    }
+
+    public void updateItem(ItemFormDto itemFormDto) {
+        this.itemNm = itemFormDto.getItemNm();
+        this.price = itemFormDto.getPrice();
+        this.stockNumber = itemFormDto.getStockNumber();
+        this.itemDetail = itemFormDto.getItemDetail();
+        this.itemSellStatus = itemFormDto.getItemSellStatus();
     }
 }

@@ -18,6 +18,6 @@ public interface ItemRepository extends JpaRepository<Item, Long> {
     List<Item> findByPriceLessThanOrderByPriceDesc(Integer price);
 
     // 변수명을 적어줄 땐 :를 사용
-    @Query("select i from Item i where i.itemDetail like  %:itemDetail% order by i.price desc ")
+    @Query("select i from Item i where i.itemDetail like  %:itemDetail% order by i.price desc")
     List<Item> findByItemDetail(@Param("itemDetail") String itemDetail);
 }
