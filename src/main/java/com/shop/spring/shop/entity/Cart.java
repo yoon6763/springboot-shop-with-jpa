@@ -1,14 +1,12 @@
 package com.shop.spring.shop.entity;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.*;
 
 @Table(name = "cart")
 @Getter
+@Setter
 @ToString
 @Entity
 @NoArgsConstructor
@@ -26,5 +24,11 @@ public class Cart {
     @Builder
     public Cart(Member member) {
         this.member = member;
+    }
+
+    public static Cart createCart(Member member) {
+        Cart cart = new Cart();
+        cart.setMember(member);
+        return cart;
     }
 }
