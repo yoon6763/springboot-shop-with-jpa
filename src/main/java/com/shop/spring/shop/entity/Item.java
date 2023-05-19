@@ -49,6 +49,10 @@ public class Item extends BaseEntity {
         this.stockNumber = restStock;
     }
 
+    public void addStock(int stockNumber) {
+        this.stockNumber += stockNumber;
+    }
+
     @Builder
     public Item(String itemNm, int price, int stockNumber, String itemDetail, ItemSellStatus itemSellStatus, LocalDateTime regTime, LocalDateTime updateTime) {
         this.itemNm = itemNm;

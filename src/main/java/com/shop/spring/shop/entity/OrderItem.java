@@ -29,7 +29,11 @@ public class OrderItem {
 
     private int count;
 
-    public static OrderItem createOrderItem (Item item, int count) {
+    public void cancel() {
+        this.getItem().addStock(count);
+    }
+
+    public static OrderItem createOrderItem(Item item, int count) {
         OrderItem orderItem = new OrderItem();
         orderItem.setItem(item);
         orderItem.setCount(count);
