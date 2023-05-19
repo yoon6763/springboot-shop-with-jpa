@@ -2,6 +2,7 @@ package com.shop.spring.shop.entity;
 
 import com.shop.spring.shop.constant.OrderStatus;
 import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -11,6 +12,7 @@ import java.util.List;
 @Entity
 @Table(name = "orders") // 정렬할 때 사용되는 order 키워드가 있기 때문에 orders 로 이름을 지정
 @Getter
+@Setter
 public class Order {
 
     @Id
@@ -33,4 +35,28 @@ public class Order {
     private LocalDateTime regTime;
 
     private LocalDateTime updateTime;
+
+    public void addOrderItem(OrderItem orderItem) {
+        orderItems.add(orderItem);
+        orderItem.setOrder(this);
+    }
+
+    public static Order createOrder(Member member, List<OrderItem> orderItemList) {
+        Order order = new Order();
+        order.setMember(member);
+        for (OrderItem orderItem : orderItemList) {
+            order.addOrderItem(orderItem);
+        }
+        order.setOrderStatus(OrderStatus.ORDER);
+        order.setOrderDate(LocalDateTime.now());
+        return order;
+    }
+
+    public int getTotalPrice() {
+        int totalPrice = 0;
+        for (OrderItem orderItem : orderItems) {
+            totalPrice += orderItem.getOrderPrice();
+        }
+        return totalPrice;
+    }
 }

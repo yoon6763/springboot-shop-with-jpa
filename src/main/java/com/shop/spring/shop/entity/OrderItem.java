@@ -3,10 +3,12 @@ package com.shop.spring.shop.entity;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 
 @Getter
+@Setter
 @Entity
 @NoArgsConstructor
 public class OrderItem {
@@ -26,6 +28,16 @@ public class OrderItem {
     private int orderPrice;
 
     private int count;
+
+    public static OrderItem createOrderItem (Item item, int count) {
+        OrderItem orderItem = new OrderItem();
+        orderItem.setItem(item);
+        orderItem.setCount(count);
+        orderItem.setOrderPrice(item.getPrice());
+
+        item.removeStock(count);
+        return orderItem;
+    }
 
     @Builder
     public OrderItem(Item item, Order order, int orderPrice, int count) {

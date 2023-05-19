@@ -8,14 +8,13 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "member")
-@Getter
-@Setter
+@Table(name="member")
+@Getter @Setter
 @ToString
-@NoArgsConstructor
 public class Member extends BaseEntity {
+
     @Id
-    @Column(name = "member_id")
+    @Column(name="member_id")
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
@@ -31,24 +30,14 @@ public class Member extends BaseEntity {
     @Enumerated(EnumType.STRING)
     private Role role;
 
-    @Builder
-    public Member(String name, String email, String password, String address, Role role) {
-        this.name = name;
-        this.email = email;
-        this.password = password;
-        this.address = address;
-        this.role = role;
-    }
-
-    public static Member createMember(MemberFormDto memberFormDto, PasswordEncoder passwordEncoder) {
+    public static Member createMember(MemberFormDto memberFormDto, PasswordEncoder passwordEncoder){
+        Member member = new Member();
+        member.setName(memberFormDto.getName());
+        member.setEmail(memberFormDto.getEmail());
+        member.setAddress(memberFormDto.getAddress());
         String password = passwordEncoder.encode(memberFormDto.getPassword());
-
-        return Member.builder()
-                .name(memberFormDto.getName())
-                .email(memberFormDto.getEmail())
-                .address(memberFormDto.getAddress())
-                .password(password)
-                .role(Role.USER)
-                .build();
+        member.setPassword(password);
+        member.setRole(Role.ADMIN);
+        return member;
     }
 }
